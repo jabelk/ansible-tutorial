@@ -1,0 +1,63 @@
+{
+    "id": "ccna-intro-acl",
+    "title": "CCNA: Configure Your First ACL",
+    "description": "Unlock the power of access control lists...",
+    "date": "2024-2-23",
+    "duration": "0h30m00s",
+    "ia-guid": "3713bde0-a36a-4aab-ac6c-6acc2dcd38e6",
+    "lesson-guid": "a228fed4-204f-4f86-a444-22c6a6bafde8",
+    "certifications": "ccna",
+    "skill-levels": "intermediate",
+    "tags": [
+        {
+            "tag": "CCNA"
+        },
+        {
+            "tag": "Security"
+        }
+    ],
+    "technologies": [
+        {
+            "tech": "Networking"
+        }
+    ],
+    "files": [
+        {
+            "label": "Overview",
+            "duration": "5:00",
+            "xy-guid": "fbf9faa3-e05e-4ed8-97f4-5f0550347723",
+            "file": "step-1.md"
+        },
+        {
+            "label": "Importing and Starting the Lab Topology",
+            "duration": "3:00",
+            "xy-guid": "5d1a5f57-55f7-43ef-8467-d7c074eb9066",
+            "file": "step-2.md"
+        },
+        {
+            "label": "ACL Overview",
+            "duration": "10:00",
+            "xy-guid": "07c6812b-205c-4e54-abcb-f4ca48b1cfc6",
+            "file": "step-3.md"
+        },
+        {
+            "label": "Configure Your First ACL",
+            "duration": "15:00",
+            "xy-guid": "8c9e2e42-f394-4a49-8ded-efcf599feb79",
+            "file": "step-4.md"
+        },
+        {
+            "label": "Congratulations",
+            "duration": "1:00",
+            "xy-guid": "c66f2056-2fa4-4608-86d2-e7939bada500",
+            "file": "step-5.md"
+        }
+    ],
+    "authors": [
+        {
+            "name": "Jason Belk",
+            "email": "jabelk@cisco.com"
+        }
+    ],
+    "active": true
+}
