@@ -1,0 +1,33 @@
+---
+- name: "PLAY 1: RENDER HUGO J2 STEP MARKDOWN TEMPLATE TO FILE"
+  hosts: localhost
+  gather_facts: false
+  connection: local
+  vars:
+    tut_data:
+      training_resources: |-
+        - CCNA E-Learning: [The Implementing and Administering Cisco Solutions (CCNA) v2.0 course](https://learningnetwork.cisco.com/s/topic/0TO3i0000008jYHGAY/ccna-certification-community) gives you a broad range of fundamental knowledge for all IT careers.
+
+        - [200-301 CCNA Study Material](https://learningnetwork.cisco.com/s/learning-plan-detail-standard?ltui__urlRecordId=a1c3i0000005hsQAAQ&ltui__urlRedirect=learning-plan-detail-standard) page. This page is designed to help you quickly find what you are looking for by organizing the content according to the exam topics.
+
+        - [200-301 CCNA Exam Topics and Study Plan](https://learningnetwork.cisco.com/s/ccna-exam-topics)
+      name: "CCNA: Introduction to ACLs"
+      authors: "Jason Belk"
+      duration: "25:00"
+      description: "Learn ACLs the easy way!"
+    tutorial_name: "ccna-intro-acl"
+    output_path: "./outputs/{{ tutorial_name }}" #final slash not in path "./outputs/tutorial_name"
+  tasks:
+    - name: "TASK: DEBUG tut_data"
+      ansible.builtin.debug:
+        var: tut_data
+    - name: "TASK 1: ENSURE TUT DIRECTORY EXISTS FOR FILES"
+      file:
+        path: "{{output_path}}"
+        recurse: yes
+        state: directory
+    - name: "TASK 2: RENDER J2 HUGO MD TEMPLATE TO FILE IN TUT DIR"
+      template:
+        src: "templates/hugo_steps.j2"
+        dest: "{{ output_path }}/index.md"
+

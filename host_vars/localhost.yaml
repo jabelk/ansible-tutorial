@@ -1,0 +1,10 @@
+# tut_data:
+#   training_resources: |-
+#     - CCNA E-Learning: [The Implementing and Administering Cisco Solutions (CCNA) v2.0 course](https://learningnetwork.cisco.com/s/topic/0TO3i0000008jYHGAY/ccna-certification-community) gives you a broad range of fundamental knowledge for all IT careers.
+
+#     - [200-301 CCNA Study Material](https://learningnetwork.cisco.com/s/learning-plan-detail-standard?ltui__urlRecordId=a1c3i0000005hsQAAQ&ltui__urlRedirect=learning-plan-detail-standard) page. This page is designed to help you quickly find what you are looking for by organizing the content according to the exam topics.
+
+#     - [200-301 CCNA Exam Topics and Study Plan](https://learningnetwork.cisco.com/s/ccna-exam-topics)
+#   name: "CCNA: Introduction to ACLs"
+#   authors: "Jason Belk"
+#   duration: "25:00"
