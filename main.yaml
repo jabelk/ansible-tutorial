@@ -15,19 +15,57 @@
       authors: "Jason Belk"
       duration: "25:00"
       description: "Learn ACLs the easy way!"
-    tutorial_name: "ccna-intro-acl"
-    output_path: "./outputs/{{ tutorial_name }}" #final slash not in path "./outputs/tutorial_name"
+    tutorial_name: "ccna-intro-acl-test"
+    output_path: "./outputs/{{ tutorial_name }}/" #final slash in path "./outputs/tutorial_name/"
+    step_delimiter: "lookup('file', 'templates/step_delimiter.j2')"
+    step_label: "Your Step Label Here"  # You can change this as needed
   tasks:
-    - name: "TASK: DEBUG tut_data"
-      ansible.builtin.debug:
-        var: tut_data
-    - name: "TASK 1: ENSURE TUT DIRECTORY EXISTS FOR FILES"
-      file:
-        path: "{{output_path}}"
-        recurse: yes
-        state: directory
-    - name: "TASK 2: RENDER J2 HUGO MD TEMPLATE TO FILE IN TUT DIR"
-      template:
-        src: "templates/hugo_steps.j2"
-        dest: "{{ output_path }}/index.md"
+    # - name: "TASK: DEBUG tut_data"
+    #   ansible.builtin.debug:
+    #     var: tut_data
+    # - name: "TASK 1: ENSURE TUT DIRECTORY EXISTS FOR FILES"
+    #   file:
+    #     path: "{{output_path}}"
+    #     recurse: yes
+    #     state: directory
+    # - name: "TASK 2: RENDER J2 HUGO MD TEMPLATE TO FILE IN TUT DIR"
+    #   template:
+    #     src: "templates/hugo_steps.j2"
+    #     dest: "{{ output_path }}/index.md"
+    #   # assembles all the files in files/ccna-intro-acl-test and 
+    #   # copies them to the output directory with delimiters
+    # - name: "TASK 3: ASSEMBLE INDIVIDUAL STEP FILES INTO ONE MARKDOWN FILE"
+    #   assemble:
+    #     src: "files/{{ tutorial_name }}"
+    #     dest: "{{ output_path }}/index.md"
+    #     delimiter: "{{ step_delimiter }}"
+    #     regexp: "step.*.md"
+    #   delegate_to: localhost
+    #   run_once: true
+
+    # - name: "TASK 2: RENDER J2 HUGO MD TEMPLATE TO FILE IN TUT DIR"
+    #   template:
+    #     src: "templates/hugo_steps.j2"
+    #     dest: "{{ output_path }}/index.md"
+
+    - name: "FIND STEP FILES"
+      find:
+        paths: "files/{{ tutorial_name }}"
+        patterns: "step-*.md"
+      register: step_files
+    # PRINT OUT THE VARIABLE
+    - debug:
+        var: step_files
+    - name: "READ STEP FILES CONTENT"
+      slurp:
+        src: "{{ item.path }}"
+      register: slurped_files
+      loop: "{{ step_files.files }}"
+    # PRINT OUT THE VARIABLE
+    - debug:
+        var: slurped_files
+    - name: "SET VARIABLE KEY FILENAME - VALUE FILE CONTENT"
+      set_fact:
+        steps_content: "{{ steps_content | default({}) | combine( {item.item.path | basename : (item.content | b64decode) }) }}"
+      loop: "{{ slurped_files.results }}"
 
